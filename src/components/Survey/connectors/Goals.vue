@@ -1,4 +1,5 @@
 <script>
+  
   import CheckButton from '@/components/Survey/components/CheckButton'
   import ThvButton from '@/components/Shared/Button'
 
@@ -8,10 +9,9 @@
       ThvButton,
       CheckButton
     },
-    props: {
-      name: {
-        type: String,
-        default: ''
+    computed: {
+      name () {
+        return this.$store.getters['survey/name']
       }
     },
     data () {
@@ -56,7 +56,7 @@
         <h1>Nice to meet you {{ name }}. What would you like to focus on?</h1>
         <p class="body--large question-description">Choose up to four</p>
         <div class="spacer sp__top--sm"></div>
-        <check-button v-for="(goal, key) in goals" :key="key" :text="goal.name"></check-button>
+        <check-button v-for="(goal, key) in goals" :key="key" :value="goal.name" :text="goal.name"></check-button>
         <div class="grid-x button-container">
           <div class="cell auto">
             <div class="back-button-container">
