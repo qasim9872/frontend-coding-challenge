@@ -13,9 +13,13 @@
         name: ''
       }
     },
+    mounted () {
+      this.name = this.$store.getters['survey/name'] || ''
+    },
     methods: {
       submit () {
-        this.$router.push({ name: 'goals', params: { name: this.name } })
+        this.$store.commit('survey/setName', this.name)
+        this.$router.push('/goals')
       }
     }
   }
