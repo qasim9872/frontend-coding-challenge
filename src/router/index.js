@@ -34,6 +34,7 @@ const router = new Router({
         {
           name: 'goals',
           path: 'goals',
+          props: true,
           component: Survey.connectors.Goals,
           meta: {
             layout: MinimalLayout,
