@@ -10,5 +10,9 @@ export default {
   diet (state) {
     console.log('getting diet', state)
     return state.diet
+  },
+  dob (state) {
+    console.log('getting dob', state)
+    return state.dob
   }
 }

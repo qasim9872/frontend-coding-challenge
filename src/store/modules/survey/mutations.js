@@ -10,5 +10,9 @@ export default {
   setDiet (state, diet) {
     console.log('setting diet', diet)
     state.diet = diet
+  },
+  setDob (state, dob) {
+    console.log('setting dob', dob)
+    state.dob = dob
   }
 }
