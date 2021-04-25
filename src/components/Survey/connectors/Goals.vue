@@ -44,7 +44,7 @@
       }
     },
     mounted () {
-      this.selectedGoals = this.$store.getters['survey/goals'] || []
+      this.selectedGoals = [...this.$store.getters['survey/goals']] // clone the array
     },
     methods: {
       submit () {
@@ -54,11 +54,10 @@
       back () {
         this.$router.push('/name')
       },
-      toggleGoal (goal) {
-        const lowerCaseGoalName = goal.name.toLowerCase()
-        console.log('goal clicked: ', lowerCaseGoalName)
+      toggleGoal (goalName) {
+        console.log('goal clicked: ', { goalName })
 
-        const goalIndex = this.selectedGoals.indexOf(lowerCaseGoalName)
+        const goalIndex = this.selectedGoals.indexOf(goalName)
         const isGoalAlreadySelected = goalIndex > -1
 
         if (isGoalAlreadySelected) {
@@ -66,7 +65,7 @@
           this.selectedGoals.splice(goalIndex, 1)
         } else {
           // add goal to selected goals array
-          this.selectedGoals.push(lowerCaseGoalName)
+          this.selectedGoals.push(goalName)
         }
       }
     }
@@ -80,7 +79,7 @@
         <h1>Nice to meet you {{ name }}. What would you like to focus on?</h1>
         <p class="body--large question-description">Choose up to four</p>
         <div class="spacer sp__top--sm"></div>
-        <check-button v-for="(goal, key) in goals" :key="key" :value="goal.name" :selected="selectedGoals.includes(goal.name.toLowerCase())" :text="goal.name" @click="toggleGoal(goal)"></check-button>
+        <check-button v-for="(goal, key) in goals" :key="key" :value="goal.name.toLowerCase()" :selected="selectedGoals.includes(goal.name.toLowerCase())" :text="goal.name" @click="toggleGoal"></check-button>
         <div class="grid-x button-container">
           <div class="cell auto">
             <div class="back-button-container">
