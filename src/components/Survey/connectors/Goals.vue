@@ -43,6 +43,9 @@
         }
       }
     },
+    mounted () {
+      this.selectedGoals = this.$store.getters['survey/goals']
+    },
     methods: {
       submit () {
         this.$store.commit('survey/setGoals', this.selectedGoals)
