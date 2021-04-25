@@ -1,7 +1,8 @@
 <script>
-  
   import CheckButton from '@/components/Survey/components/CheckButton'
   import ThvButton from '@/components/Shared/Button'
+
+  const MAX_GOALS_ALLOWED = 4
 
   export default {
     name: 'Goals',
@@ -12,10 +13,14 @@
     computed: {
       name () {
         return this.$store.getters['survey/name']
+      },
+      isSelectionLengthValid () {
+        return this.selectedGoals.length <= MAX_GOALS_ALLOWED
       }
     },
     data () {
       return {
+        selectedGoals: [],
         goals: {
           improveEnergy: {
             name: 'Energy'
@@ -40,10 +45,26 @@
     },
     methods: {
       submit () {
+        this.$store.commit('survey/setGoals', this.selectedGoals)
         this.$router.push('/diet')
       },
       back () {
         this.$router.push('/name')
+      },
+      toggleGoal (goal) {
+        const lowerCaseGoalName = goal.name.toLowerCase()
+        console.log('goal clicked: ', lowerCaseGoalName)
+
+        const goalIndex = this.selectedGoals.indexOf(lowerCaseGoalName)
+        const isGoalAlreadySelected = goalIndex > -1
+
+        if (isGoalAlreadySelected) {
+          // remove goal from selected goals array
+          this.selectedGoals.splice(goalIndex, 1)
+        } else {
+          // add goal to selected goals array
+          this.selectedGoals.push(lowerCaseGoalName)
+        }
       }
     }
   }
@@ -56,7 +77,7 @@
         <h1>Nice to meet you {{ name }}. What would you like to focus on?</h1>
         <p class="body--large question-description">Choose up to four</p>
         <div class="spacer sp__top--sm"></div>
-        <check-button v-for="(goal, key) in goals" :key="key" :value="goal.name" :text="goal.name"></check-button>
+        <check-button v-for="(goal, key) in goals" :key="key" :value="goal.name" :selected="selectedGoals.includes(goal.name.toLowerCase())" :text="goal.name" @click="toggleGoal(goal)"></check-button>
         <div class="grid-x button-container">
           <div class="cell auto">
             <div class="back-button-container">
@@ -64,7 +85,7 @@
             </div>
           </div>
           <div class="cell auto align-right">
-            <thv-button element="button" size="large" @click="submit">Next</thv-button>
+            <thv-button element="button" size="large" :disabled="!isSelectionLengthValid" @click="submit">Next</thv-button>
           </div>
         </div>
       </div>
