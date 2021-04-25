@@ -37,11 +37,8 @@
           if (result && !this.feedback) {
             this.$store.commit('survey/setDob', this.dob)
 
-            const response = await this.$store.dispatch('survey/sendToApi')
-            console.log(response)
+            const isCreated = await this.$store.dispatch('survey/sendToApi')
   
-            const isCreated = response.status === 201
-
             if (isCreated) {
               this.$router.push('/success')
             } else {

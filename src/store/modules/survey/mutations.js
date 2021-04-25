@@ -14,5 +14,9 @@ export default {
   setDob (state, dob) {
     console.log('setting dob', dob)
     state.dob = dob
+  },
+  setApiResponse (state, created) {
+    console.log('setting created', created)
+    state.created = created
   }
 }

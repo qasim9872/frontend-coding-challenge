@@ -2,7 +2,7 @@ import axios from 'axios'
 const API_URL = 'http://localhost:3000'
 
 export default {
-  async sendToApi ({ state }, data) {
+  async sendToApi ({ state, commit }) {
     const body = {
       user: {
         name: state.name,
@@ -13,6 +13,13 @@ export default {
     }
 
     const config = { headers: { 'content-type': 'application/json' } }
-    return axios.post(`${API_URL}/users`, body, config)
+    const response = await axios.post(`${API_URL}/users`, body, config)
+    console.log(response)
+
+    const isUserCreated = response.status === 201
+
+    commit('setApiResponse', isUserCreated)
+
+    return isUserCreated
   }
 }
