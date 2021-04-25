@@ -6,5 +6,9 @@ export default {
   goals (state) {
     console.log('getting goals', state)
     return state.goals
+  },
+  diet (state) {
+    console.log('getting diet', state)
+    return state.diet
   }
 }

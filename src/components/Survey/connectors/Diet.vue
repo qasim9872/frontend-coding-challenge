@@ -10,6 +10,7 @@
     },
     data () {
       return {
+        selectedDiet: '',
         diets: {
           no: {
             name: 'No'
@@ -35,8 +36,20 @@
         }
       }
     },
+    mounted () {
+      this.selectedDiet = this.$store.getters['survey/diet']
+    },
+    computed: {
+      isDietSelected () {
+        return Boolean(this.selectedDiet)
+      }
+    },
     methods: {
+      selectDiet (dietName) {
+        this.selectedDiet = dietName
+      },
       submit () {
+        this.$store.commit('survey/setDiet', this.selectedDiet)
         this.$router.push('/dob')
       },
       back () {
@@ -52,7 +65,7 @@
       <div class="survey-questions__diet align-center">
         <h1>Do you follow a particular diet?</h1>
         <div class="spacer sp__top--sm"></div>
-        <check-button v-for="(diet, key) in diets" :key="key" :text="diet.name"></check-button>
+        <check-button v-for="(diet, key) in diets" :key="key" :value="diet.name.toLowerCase()" :selected="selectedDiet === diet.name.toLowerCase()" :text="diet.name" @click="selectDiet"></check-button>
         <div class="grid-x button-container">
           <div class="cell auto">
             <div class="back-button-container">
@@ -60,7 +73,7 @@
             </div>
           </div>
           <div class="cell auto align-right">
-            <thv-button element="button" size="large" @click="submit">Next</thv-button>
+            <thv-button element="button" size="large" :disabled="!isDietSelected" @click="submit">Next</thv-button>
           </div>
         </div>
       </div>

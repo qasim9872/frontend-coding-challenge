@@ -6,5 +6,9 @@ export default {
   setGoals (state, goals) {
     console.log('setting goals', goals)
     state.goals = goals
+  },
+  setDiet (state, diet) {
+    console.log('setting diet', diet)
+    state.diet = diet
   }
 }
