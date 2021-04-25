@@ -5,6 +5,14 @@
     name: 'SurveyProgress',
     components: {
       ProgressBar
+    },
+    computed: {
+      stages () {
+        return Object.keys(this.$store.state.survey)
+      },
+      currentStep () {
+        return Object.values(this.$store.state.survey).filter(Boolean).length
+      }
     }
   }
 </script>
@@ -13,7 +21,7 @@
   <div class="progress-bar-container">
   <!-- SUGGESTION: progress-bar needs a currentStep and a stages array. These need to be passed in here	 -->
   <!-- SUGGESTION: un-comment the below when your ready to pass these in	 -->
-  <!-- <progress-bar :currentStep='currentStep', :totalSteps='stages.length'></progress-bar> -->
+  <progress-bar :currentStep='currentStep' :totalSteps='stages.length'></progress-bar>
   </div>
 </template>
 
