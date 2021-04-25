@@ -13,14 +13,19 @@ export default {
     }
 
     const config = { headers: { 'content-type': 'application/json' } }
-    const response = await axios.post(`${API_URL}/users`, body, config)
-    console.log(response)
 
-    const isUserCreated = response.status === 201
+    try {
+      const response = await axios.post(`${API_URL}/users`, body, config)
+      console.log(response)
 
-    commit('setApiResponse', isUserCreated)
+      const isUserCreated = response.status === 201
+      commit('setApiResponse', isUserCreated)
 
-    return isUserCreated
+      return isUserCreated
+    } catch (error) {
+      console.log('an error occurred while calling the api')
+      console.log(error)
+    }
   },
   reset ({ commit }) {
     console.log('resetting survey state')

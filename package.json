@@ -20,6 +20,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "moment": "^2.28.0",
     "vee-validate": "^2.2.15",
     "vue": "^2.6.12",
