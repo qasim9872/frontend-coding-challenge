@@ -19,7 +19,7 @@
 </script>
 
 <template>  
-  <div class="check-button" :class="{ 'check-button--selected': selected }" tabindex="0" @click="$emit('click')">
+  <div class="check-button" :class="{ 'check-button--selected': selected }" tabindex="0" @click="$emit('click', value)">
     <p class="check-button__text body--large">{{ text }}</p>
   </div>
 </template>
