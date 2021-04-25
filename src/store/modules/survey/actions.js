@@ -21,5 +21,14 @@ export default {
     commit('setApiResponse', isUserCreated)
 
     return isUserCreated
+  },
+  reset ({ commit }) {
+    console.log('resetting survey state')
+
+    commit('setName', '')
+    commit('setGoals', undefined)
+    commit('setDiet', '')
+    commit('setDob', '')
+    commit('setApiResponse', false)
   }
 }
