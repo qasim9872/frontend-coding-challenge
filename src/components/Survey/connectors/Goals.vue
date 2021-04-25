@@ -44,7 +44,7 @@
       }
     },
     mounted () {
-      this.selectedGoals = this.$store.getters['survey/goals']
+      this.selectedGoals = this.$store.getters['survey/goals'] || []
     },
     methods: {
       submit () {
