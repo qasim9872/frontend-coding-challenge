@@ -33,10 +33,20 @@
       submit () {
         this.$refs.DobInput.handleSubmit()
         this.$validator.reset()
-        this.$validator.validate().then(result => {
+        this.$validator.validate().then(async result => {
           if (result && !this.feedback) {
             this.$store.commit('survey/setDob', this.dob)
-            this.$router.push('/success')
+
+            const response = await this.$store.dispatch('survey/sendToApi')
+            console.log(response)
+  
+            const isCreated = response.status === 201
+
+            if (isCreated) {
+              this.$router.push('/success')
+            } else {
+              alert('check console for errors')
+            }
           }
         })
       },
