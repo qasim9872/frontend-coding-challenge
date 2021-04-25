@@ -44,7 +44,8 @@
       }
     },
     mounted () {
-      this.selectedGoals = [...this.$store.getters['survey/goals']] // clone the array
+      const originalSelectedGoals = this.$store.getters['survey/goals'] || []
+      this.selectedGoals = [...originalSelectedGoals] // clone the array
     },
     methods: {
       submit () {
